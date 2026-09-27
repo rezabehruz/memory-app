@@ -1,0 +1,25 @@
+@use "./imports.scss" as all;
+
+.home {
+  @include all.section;
+
+  .content {
+    width: 100%;
+    max-width: 1440px;
+    height: 100vh;
+    background: all.$background-dark;
+
+    p {
+      font-family: "Almarai";
+      font-weight: 400;
+      font-size: 48px;
+    }
+
+    h2 {
+      font-family: "Red Rose";
+      font-weight: 700;
+      font-size: 140px;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+@mixin section {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin display-flex($direction: row, $justify: flex-start, $align: stretch, $gap: 0, $grow: 0, $wrap: nowrap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+  flex-grow: $grow;
+  flex-wrap: $wrap;
+}
