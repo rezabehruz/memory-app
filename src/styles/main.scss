@@ -4,22 +4,65 @@
   @include all.section;
 
   .content {
+    @include all.display-flex($direction: column, $justify: center, $align: center);
     width: 100%;
     max-width: 1440px;
     height: 100vh;
     background: all.$background-dark;
+    color: all.$color-white;
 
     p {
       font-family: "Almarai";
       font-weight: 400;
-      font-size: 48px;
+      font-size: clamp(16px, 5vw, 48px);
+      margin: 0 20px;
     }
 
-    h2 {
+    span {
+      display: block;
       font-family: "Red Rose";
       font-weight: 700;
-      font-size: 140px;
-      text-align: center;
+      font-size: clamp(22px, 12vw, 140px);
+      margin-bottom: 86px;
+    }
+
+    button {
+      .img-play {
+        width: 100%;
+        height: 100%;
+      }
+
+      .play-hover {
+        display: none;
+        width: 100%;
+        height: 100%;
+      }
+
+      &:hover {
+        .img-play {
+          display: none;
+        }
+
+        .play-hover {
+          display: block;
+        }
+      }
+
+      @include all.tablet {
+        width: 100px;
+        height: 40px;
+      }
+    }
+
+    .stadia-controller {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      @include all.tablet {
+        width: 300px;
+        height: 339px;
+      }
     }
   }
 }
