@@ -1,0 +1,233 @@
+@use "./abstract/mixins" as mixins;
+@use "./abstract/media-queries" as media;
+@use "./abstract/variables" as variables;
+
+.settings {
+  @include mixins.section;
+  font-family: "Almarai";
+
+  .content {
+    @include mixins.display-flex($justify: space-between);
+    width: 100%;
+    max-width: 1440px;
+    min-height: 100vh;
+    padding: 100px;
+  }
+
+  .content-1 {
+    @include mixins.display-flex($direction: column, $gap: 42px);
+
+    .header {
+      @include mixins.display-flex($direction: column, $justify: center);
+      width: 208px;
+
+      h3 {
+        font-size: clamp(28px, 4vw, 54px);
+        text-align: center;
+      }
+
+      .line-diamond {
+        @include mixins.display-flex($direction: row-reverse, $align: center);
+
+        .line {
+          width: 100%;
+          height: 3px;
+          background: #f0ea6e;
+        }
+
+        .diamond {
+          width: 14px;
+          height: 14px;
+          background: #f0ea6e;
+          transform: rotate(45deg);
+        }
+      }
+    }
+
+    .themes {
+      @include mixins.display-flex($direction: column, $gap: 16px);
+
+      &__header {
+        @include mixins.display-flex($align: center, $gap: 8px);
+        h3 {
+          font-size: 24px;
+        }
+      }
+
+      ul {
+        @include mixins.display-flex($direction: column, $gap: 8px);
+
+        .theme {
+          @include mixins.display-flex($align: center, $gap: 12px);
+          padding-left: 32px;
+
+          &__radio {
+            display: inline-block;
+            height: 18px;
+            width: 18px;
+            border: 3px solid rgb(51, 49, 49);
+            border-radius: 50%;
+          }
+
+          span {
+            font-size: 24px;
+          }
+
+          .line-diamond {
+            @include mixins.display-flex($align: center);
+
+            .line {
+              width: 62px;
+              height: 3px;
+              background: #f0ea6e;
+            }
+
+            .diamond {
+              width: 12px;
+              height: 12px;
+              background: #f0ea6e;
+              transform: rotate(45deg);
+            }
+          }
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .players {
+      @include mixins.display-flex($direction: column, $gap: 16px);
+
+      &__header {
+        @include mixins.display-flex($align: center, $gap: 8px);
+        h3 {
+          font-size: 24px;
+        }
+      }
+
+      ul {
+        @include mixins.display-flex($direction: column, $gap: 8px);
+
+        .player {
+          @include mixins.display-flex($align: center, $gap: 12px);
+          padding-left: 32px;
+
+          &__radio {
+            display: inline-block;
+            height: 18px;
+            width: 18px;
+            border: 3px solid rgb(51, 49, 49);
+            border-radius: 50%;
+          }
+
+          span {
+            font-size: 24px;
+          }
+
+          .line-diamond {
+            @include mixins.display-flex($align: center);
+
+            .line {
+              width: 62px;
+              height: 3px;
+              background: #f0ea6e;
+            }
+
+            .diamond {
+              width: 12px;
+              height: 12px;
+              background: #f0ea6e;
+              transform: rotate(45deg);
+            }
+          }
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .boards {
+      @include mixins.display-flex($direction: column, $gap: 16px);
+
+      &__header {
+        @include mixins.display-flex($align: center, $gap: 8px);
+        h3 {
+          font-size: 24px;
+        }
+      }
+
+      ul {
+        @include mixins.display-flex($direction: column, $gap: 8px);
+
+        .board {
+          @include mixins.display-flex($align: center, $gap: 12px);
+          padding-left: 32px;
+
+          &__radio {
+            display: inline-block;
+            height: 18px;
+            width: 18px;
+            border: 3px solid rgb(51, 49, 49);
+            border-radius: 50%;
+          }
+
+          span {
+            font-size: 24px;
+          }
+
+          .line-diamond {
+            @include mixins.display-flex($align: center);
+
+            .line {
+              width: 62px;
+              height: 3px;
+              background: #f0ea6e;
+            }
+
+            .diamond {
+              width: 12px;
+              height: 12px;
+              background: #f0ea6e;
+              transform: rotate(45deg);
+            }
+          }
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+
+  .content-2 {
+    @include mixins.display-flex($direction: column, $gap: 32px, $align: center);
+    width: 50%;
+    height: 100vh;
+
+    .img-theme {
+    }
+
+    .specs-start {
+      @include mixins.display-flex($gap: 16px);
+      font-size: 20px;
+      background-color: #d4d3ce;
+      padding: 8px 18px;
+
+      .specs {
+        @include mixins.display-flex($align: center, $gap: 16px);
+
+        .line {
+          height: 90%;
+          width: 6px;
+          background-color: #f0ea6e;
+          transform: rotate(25deg);
+        }
+      }
+    }
+  }
+}
