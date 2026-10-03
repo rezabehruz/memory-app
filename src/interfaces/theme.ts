@@ -1,4 +1,4 @@
-type selectedTheme = "code" | "gaming" | "da" | "food";
+type selectedTheme = "coding" | "gaming" | "da" | "food";
 
 interface Theme {
   coding: string;

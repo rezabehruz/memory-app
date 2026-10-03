@@ -16,7 +16,7 @@ export function settingsTemplate(): string {
                 <h3>Game Themes</h3>
               </div>
               <ul>
-                <li id="code-theme" class="theme">
+                <li id="coding-theme" class="theme selected">
                   <span class="theme__radio"></span>
                   <span>Code vibes theme</span>
                   <div class="line-diamond">
@@ -56,7 +56,7 @@ export function settingsTemplate(): string {
                 <h3>Choose player</h3>
               </div>
               <ul>
-                <li id="blue" class="player">
+                <li id="blue" class="player selected">
                   <span class="player__radio"></span>
                   <span>Blue</span>
                   <div class="line-diamond">
@@ -109,7 +109,7 @@ export function settingsTemplate(): string {
           </div>
 
           <div class="content-2">
-            <img src="/images/themes/code-theme.png" alt="code theme" class="img-theme" />
+            <img src="/images/themes/coding.png" alt="code theme" id="img-theme" class="img-theme" />
             <div class="specs-start">
               <div class="specs">
                 <span>Game theme</span>
