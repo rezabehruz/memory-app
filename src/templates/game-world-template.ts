@@ -6,18 +6,18 @@ export function gameWorldTemplate(): string {
             <div class="players">
               <div class="player-1">
                 <img src="/icons/blue.png" alt="blue arrow" />
-                <p>Blue <span id="score"> 0 </span></p>
+                <p>Blue <span id="score-1"> 0 </span></p>
               </div>
               <div class="player-2">
                 <img src="/icons/orange.png" alt="orange arrow" />
-                <p>Orange <span id="score"> 0 </span></p>
+                <p>Orange <span id="score-2"> 0 </span></p>
               </div>
             </div>
             <div class="current-player">
               <span>
                 Current player
               </span>
-              <img src="/icons/orange.png" alt="current player arrow" />
+              <img src="/icons/orange.png" alt="current player arrow" id="current-player"/>
             </div>
             <button class="exit-game">
               <img src="/icons/exit.png" alt="exit game" />

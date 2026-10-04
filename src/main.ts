@@ -12,16 +12,6 @@ let settings: Settings;
 
 init();
 
-function toggleCard() {
-  const field = document.getElementById("field");
-
-  field?.addEventListener("click", (e) => {
-    const card = (e.target as HTMLElement).closest(".card");
-
-    card?.classList.toggle("is-flipped");
-  });
-}
-
 function init() {
   BTN_PLAY.addEventListener("click", playGame);
 }
@@ -38,5 +28,5 @@ function startGame() {
   MAIN_CONTAINER.innerHTML = gameWorldTemplate();
 
   const GAME_WORLD = new GameWorld(settings);
-  
+
 }

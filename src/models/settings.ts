@@ -91,14 +91,18 @@ export class Settings {
     this.color_orange_ref.classList.remove("selected");
 
     el.classList.add("selected");
+
+    this.player.selectedPlayer = color;
   }
 
-  changeBoardSize(boardSize: number, el: HTMLElement) {
+  changeBoardSize(boardSize: selectedBoardSize, el: HTMLElement) {
     this.card_16_ref.classList.remove("selected");
     this.card_24_ref.classList.remove("selected");
     this.card_36_ref.classList.remove("selected");
 
     el.classList.add("selected");
+
+    this.boardSize.selectedBoardSize = boardSize;
   }
 
   // #endregion
