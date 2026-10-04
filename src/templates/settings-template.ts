@@ -88,7 +88,7 @@ export function settingsTemplate(): string {
                     <span class="diamond"></span>
                   </div>
                 </li>
-                <li id="card-24" class="board">
+                <li id="card-24" class="board selected">
                   <span class="board__radio"></span>
                   <span>24 cards</span>
                   <div class="line-diamond">
@@ -119,7 +119,7 @@ export function settingsTemplate(): string {
                 <span>Board size</span>
               </div>
               <button>
-                <img src="/icons/btn-start.png" alt="start icon" />
+                <img src="/icons/btn-start.png" alt="start icon" id="btn-start" />
               </button>
             </div>
           </div>

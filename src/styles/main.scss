@@ -2,13 +2,13 @@
 
 .home {
   @include all.section;
+  background: all.$background-dark;
 
   .content {
     @include all.display-flex($direction: column, $justify: center, $align: center);
     width: 100%;
     max-width: 1440px;
     height: 100vh;
-    background: all.$background-dark;
     color: all.$color-white;
 
     p {
