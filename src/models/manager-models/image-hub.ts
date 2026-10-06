@@ -1,0 +1,43 @@
+export class ImageHub {
+  static CODING_THEME = [
+    "angular",
+    "bootstrap",
+    "cmd",
+    "css",
+    "db",
+    "dj",
+    "firebase",
+    "git",
+    "github",
+    "html",
+    "js",
+    "nodejs",
+    "python",
+    "reactjs",
+    "sass",
+    "ts",
+    "vscode",
+    "vuejs",
+  ];
+
+  static FOOD_THEME = [
+    "food-1",
+    "food-2",
+    "food-3",
+    "food-4",
+    "food-5",
+    "food-6",
+    "food-7",
+    "food-8",
+    "food-9",
+    "food-10",
+    "food-11",
+    "food-12",
+    "food-13",
+    "food-14",
+    "food-15",
+    "food-16",
+    "food-17",
+    "food-18",
+  ];
+}

@@ -1,7 +1,7 @@
 .card {
   height: 100px;
   aspect-ratio: 1 / 1;
-  background-color: rgb(177, 213, 177);
+  background-color: transparent;
   outline: none;
 
   &__inner {
@@ -9,6 +9,8 @@
     width: 100%;
     transition: all 300ms ease-in-out;
     transform-style: preserve-3d;
+
+    border-radius: 6px;
   }
 
   &__face {
@@ -16,11 +18,10 @@
     inset: 0;
     height: 100%;
     width: 100%;
-    background: black;
+
     backface-visibility: hidden;
 
     &--back {
-      background: red;
       transform: rotateY(180deg);
     }
   }
