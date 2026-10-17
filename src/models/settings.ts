@@ -84,6 +84,8 @@ export class Settings {
     el.classList.add("selected");
 
     this.image_theme_ref.setAttribute("src", `/images/themes/${theme}.png`);
+
+    console.log(this.theme.selectedTheme);
   }
 
   togglePlayer(color: SelectedPlayer, el: HTMLElement) {

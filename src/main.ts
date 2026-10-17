@@ -26,6 +26,7 @@ function playGame() {
 
 function startGame() {
   MAIN_CONTAINER.innerHTML = gameWorldTemplate();
+  GameWorld.THEME = settings.theme.selectedTheme;
 
   const GAME_WORLD = new GameWorld(settings);
 
