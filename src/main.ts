@@ -3,6 +3,7 @@ import { Settings } from "./models/settings";
 import { settingsTemplate } from "./templates/settings-template";
 import { gameWorldTemplate } from "./templates/game-world-template";
 import { GameWorld } from "./models/game-world";
+import { gameOverTemplate } from "./templates/game-over-template";
 
 const MAIN_CONTAINER: HTMLElement = document.getElementById("main-container") as HTMLElement;
 const BTN_PLAY: HTMLElement = document.getElementById("btn-play") as HTMLElement;
@@ -29,5 +30,4 @@ function startGame() {
   GameWorld.THEME = settings.theme.selectedTheme;
 
   const GAME_WORLD = new GameWorld(settings);
-
 }

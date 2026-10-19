@@ -1,10 +1,12 @@
 import { cardsTemplate } from "../templates/card-template";
+import { gameOverTemplate } from "../templates/game-over-template";
 import { gameWorldTemplate } from "../templates/game-world-template";
 import { Card } from "./card";
 import { ImageHub } from "./manager-models/image-hub";
 import { Settings } from "./settings";
 
 export class GameWorld {
+  parent_container_ref: HTMLElement;
   cards_container_ref: HTMLElement;
   scorePlayer_1_ref: HTMLElement;
   scorePlayer_2_ref: HTMLElement;
@@ -28,18 +30,16 @@ export class GameWorld {
     this.scorePlayer_1_ref = document.getElementById("score-1") as HTMLElement;
     this.scorePlayer_2_ref = document.getElementById("score-2") as HTMLElement;
     this.currentPlayer_img_ref = document.getElementById("current-player") as HTMLElement;
-
+    
     this.players = settings.player;
     this.currentPlayer = settings.player.selectedPlayer;
     this.boardSize = settings.boardSize.selectedBoardSize;
+
+    this.parent_container_ref = document.getElementById("main-container") as HTMLElement;
     this.cards_container_ref = document.getElementById("cards") as HTMLElement;
 
     this.calculateImgThemeIndex();
-
     this.createCards();
-
-    this.scorePlayer_1_ref.innerHTML = this.scorePlayer_1.toString();
-    this.scorePlayer_2_ref.innerHTML = this.scorePlayer_2.toString();
 
     this.setCurrentPlayer();
   }
@@ -137,6 +137,21 @@ export class GameWorld {
         });
       }, 1000);
     }
+
+    this.isGameOver();
+  }
+
+  IS_GAME_OVER: boolean = false;
+
+  isGameOver() {
+    this.IS_GAME_OVER = this.cards.every(this.isCardMatched);
+    if (this.IS_GAME_OVER) {
+      this.parent_container_ref.innerHTML = gameOverTemplate();
+    }
+  }
+
+  isCardMatched(card: Card): boolean {
+    return card.IS_MATCHED;
   }
 
   switchUser() {
