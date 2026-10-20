@@ -1,6 +1,5 @@
 import { cardsTemplate } from "../templates/card-template";
 import { GameWorld } from "./game-world";
-import { ImageHub } from "./manager-models/image-hub";
 
 export class Card {
   id: number;
@@ -8,6 +7,7 @@ export class Card {
   name: string;
   IS_FLIPPED: boolean = false;
   IS_MATCHED: boolean = false;
+  MATCHED_BY: SelectedPlayer | null = null;
 
   gameWorld: GameWorld;
 

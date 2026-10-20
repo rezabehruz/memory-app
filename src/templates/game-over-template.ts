@@ -1,7 +1,7 @@
 export function gameOverTemplate(){
     return /*html*/ `
           <section class="game-over">
-        <div class="content-1">
+        <div id="content-1" class="content-1">
           <h2>Game over</h2>
           <p class="header">Final score</p>
           <div class="players">
@@ -16,20 +16,20 @@ export function gameOverTemplate(){
           </div>
         </div>
 
-        <div class="content-2">
-          <div class="player-orange">
+        <div id="content-2" class="content-2 d-none">
+          <div id="player-orange" class="d-none">
             <p>The winner is</p>
             <h3>Orange Player</h3>
-            <img id="logo-player" src="/icons/player-orange.png" alt="player-orange" />
+            <img src="/icons/player-orange.png" alt="player-orange" />
           </div>
 
-          <div class="player-blue d-none">
+          <div id="player-blue" class="d-none">
             <p>The winner is</p>
             <h3>Blue Player</h3>
-            <img id="logo-player" src="/icons/player-blue.png" alt="player-blue" />
+            <img src="/icons/player-blue.png" alt="player-blue" />
           </div>
 
-          <div class="draw-scale d-none">
+          <div id="draw-scale" class="d-none">
             <p>It's a</p>
             <h3>DRAW</h3>
             <img src="/icons/scale-icon.png" alt="scale-icon" />

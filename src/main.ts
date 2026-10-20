@@ -1,33 +1,13 @@
 import "./styles/main.scss";
-import { Settings } from "./models/settings";
-import { settingsTemplate } from "./templates/settings-template";
-import { gameWorldTemplate } from "./templates/game-world-template";
 import { GameWorld } from "./models/game-world";
-import { gameOverTemplate } from "./templates/game-over-template";
-
-const MAIN_CONTAINER: HTMLElement = document.getElementById("main-container") as HTMLElement;
-const BTN_PLAY: HTMLElement = document.getElementById("btn-play") as HTMLElement;
-let BTN_START_GAME: HTMLElement;
-
-let settings: Settings;
 
 init();
 
 function init() {
+  const BTN_PLAY: HTMLElement = document.getElementById("btn-play") as HTMLElement;
   BTN_PLAY.addEventListener("click", playGame);
 }
 
 function playGame() {
-  MAIN_CONTAINER.innerHTML = settingsTemplate();
-  settings = new Settings();
-
-  BTN_START_GAME = document.getElementById("btn-start") as HTMLElement;
-  BTN_START_GAME.addEventListener("click", startGame);
-}
-
-function startGame() {
-  MAIN_CONTAINER.innerHTML = gameWorldTemplate();
-  GameWorld.THEME = settings.theme.selectedTheme;
-
-  const GAME_WORLD = new GameWorld(settings);
+  const gameWorld = new GameWorld();
 }

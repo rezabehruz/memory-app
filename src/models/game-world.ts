@@ -1,22 +1,22 @@
-import { cardsTemplate } from "../templates/card-template";
 import { gameOverTemplate } from "../templates/game-over-template";
 import { gameWorldTemplate } from "../templates/game-world-template";
+import { settingsTemplate } from "../templates/settings-template";
 import { Card } from "./card";
 import { ImageHub } from "./manager-models/image-hub";
 import { Settings } from "./settings";
 
 export class GameWorld {
   parent_container_ref: HTMLElement;
-  cards_container_ref: HTMLElement;
-  scorePlayer_1_ref: HTMLElement;
-  scorePlayer_2_ref: HTMLElement;
-  currentPlayer_img_ref: HTMLElement;
+  cards_container_ref!: HTMLElement;
+  scorePlayer_1_ref!: HTMLElement;
+  scorePlayer_2_ref!: HTMLElement;
+  currentPlayer_img_ref!: HTMLElement;
 
   static THEME: selectedTheme;
 
-  currentPlayer: SelectedPlayer;
-  players: Player;
-  boardSize: selectedBoardSize;
+  currentPlayer!: SelectedPlayer;
+  players!: Player;
+  boardSize!: selectedBoardSize;
 
   scorePlayer_1: number = 0;
   scorePlayer_2: number = 0;
@@ -26,16 +26,30 @@ export class GameWorld {
   MAX_FLIPPED: number = 2;
   cards: Card[] = [];
 
-  constructor(settings: Settings) {
+  settings: Settings;
+  BTN_START_GAME: HTMLElement;
+
+  constructor() {
+    this.parent_container_ref = document.getElementById("main-container") as HTMLElement;
+
+    this.parent_container_ref.innerHTML = settingsTemplate();
+    this.settings = new Settings();
+
+    this.BTN_START_GAME = document.getElementById("btn-start") as HTMLElement;
+    this.BTN_START_GAME.addEventListener("click", () => this.startGame());
+  }
+
+  startGame() {
+    this.parent_container_ref.innerHTML = gameWorldTemplate();
+    GameWorld.THEME = this.settings.theme.selectedTheme;
+
     this.scorePlayer_1_ref = document.getElementById("score-1") as HTMLElement;
     this.scorePlayer_2_ref = document.getElementById("score-2") as HTMLElement;
     this.currentPlayer_img_ref = document.getElementById("current-player") as HTMLElement;
-    
-    this.players = settings.player;
-    this.currentPlayer = settings.player.selectedPlayer;
-    this.boardSize = settings.boardSize.selectedBoardSize;
 
-    this.parent_container_ref = document.getElementById("main-container") as HTMLElement;
+    this.players = this.settings.player;
+    this.currentPlayer = this.settings.player.selectedPlayer;
+    this.boardSize = this.settings.boardSize.selectedBoardSize;
     this.cards_container_ref = document.getElementById("cards") as HTMLElement;
 
     this.calculateImgThemeIndex();
@@ -111,7 +125,10 @@ export class GameWorld {
     // if two cards are matched and did'nt match
     if (card_1 == card_2) {
       this.cards.forEach((card) => {
-        if (card.IS_FLIPPED && !card.IS_MATCHED) card.IS_MATCHED = true;
+        if (card.IS_FLIPPED && !card.IS_MATCHED) {
+          card.IS_MATCHED = true;
+          card.MATCHED_BY = this.currentPlayer;
+        }
       });
 
       card_1 = "card_1";
@@ -147,7 +164,46 @@ export class GameWorld {
     this.IS_GAME_OVER = this.cards.every(this.isCardMatched);
     if (this.IS_GAME_OVER) {
       this.parent_container_ref.innerHTML = gameOverTemplate();
+
+      this.showWinner();
     }
+  }
+
+  showWinner() {
+    let matchedByBlue: number = 0;
+    let matchedByOrange: number = 0;
+
+    const content1: HTMLElement = document.getElementById("content-1") as HTMLElement;
+    const content2: HTMLElement = document.getElementById("content-2") as HTMLElement;
+    const bluePlayerRef: HTMLElement = document.getElementById("player-blue") as HTMLElement;
+    const orangePlayerRef: HTMLElement = document.getElementById("player-orange") as HTMLElement;
+    const drawScaleRef: HTMLElement = document.getElementById("draw-scale") as HTMLElement;
+
+    const btnRestart: HTMLElement = document.getElementById("btn-home") as HTMLElement;
+
+    this.cards.forEach((card) => {
+      if (card.MATCHED_BY == "blue") matchedByBlue++;
+      if (card.MATCHED_BY == "orange") matchedByOrange++;
+    });
+
+    content1.classList.add("d-none");
+    content2.classList.remove("d-none");
+
+    if (matchedByBlue == matchedByOrange) drawScaleRef.classList.add("draw-scale");
+    if (matchedByBlue > matchedByOrange) bluePlayerRef.classList.add("player-blue");
+    if (matchedByBlue < matchedByOrange) orangePlayerRef.classList.add("player-orange");
+
+    btnRestart.addEventListener("click", () => {
+      this.restartGame();
+    });
+  }
+
+  restartGame() {
+    this.parent_container_ref.innerHTML = settingsTemplate();
+    this.settings = new Settings();
+
+    this.BTN_START_GAME = document.getElementById("btn-start") as HTMLElement;
+    this.BTN_START_GAME.addEventListener("click", () => this.startGame());
   }
 
   isCardMatched(card: Card): boolean {
