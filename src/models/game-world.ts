@@ -186,10 +186,14 @@ export class GameWorld {
 
   gameOver() {
     this.IS_GAME_OVER = this.cards.every(this.isCardMatched);
+
     if (this.IS_GAME_OVER) {
       this.parent_container_ref.innerHTML = gameOverTemplate();
-
-      this.showWinner();
+      let final_score_1_ref = document.getElementById("final-score-1") as HTMLElement;
+      let final_score_2_ref = document.getElementById("final-score-2") as HTMLElement;
+      final_score_1_ref.innerHTML = GameWorld.PLAYER_1.score.toString();
+      final_score_2_ref.innerHTML = GameWorld.PLAYER_2.score.toString();
+      setTimeout(() => this.showWinner(), 2000);
     }
   }
 
