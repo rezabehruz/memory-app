@@ -109,7 +109,7 @@ export function settingsTemplate(): string {
           </div>
 
           <div class="content-2">
-            <img src="/images/themes/coding.png" alt="code theme" id="img-theme" class="img-theme" />
+            <img src="/images/themes/coding.png" alt="theme image" id="img-theme" class="img-theme" />
             <div class="specs-start">
               <div class="specs">
                 <span>Game theme</span>
@@ -118,8 +118,11 @@ export function settingsTemplate(): string {
                 <div class="line"></div>
                 <span>Board size</span>
               </div>
-              <button>
-                <img src="/icons/btn-start.png" alt="start icon" id="btn-start" />
+              <button id="btn-start">
+                <img src="/icons/play.png" alt="start icon"/>
+                <span>
+                  Start
+                </span>
               </button>
             </div>
           </div>

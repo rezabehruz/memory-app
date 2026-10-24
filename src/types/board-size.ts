@@ -1,0 +1,1 @@
+export type boardSizes = 16 | 24 | 36;

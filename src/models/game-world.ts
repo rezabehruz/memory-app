@@ -1,28 +1,54 @@
+import { boardSizes } from "../types/board-size";
+import { Player } from "../interfaces/player";
 import { gameOverTemplate } from "../templates/game-over-template";
 import { gameWorldTemplate } from "../templates/game-world-template";
 import { settingsTemplate } from "../templates/settings-template";
 import { Card } from "./card";
 import { ImageHub } from "./manager-models/image-hub";
 import { Settings } from "./settings";
+import { theme } from "../types/theme";
+import { BoardSize } from "../interfaces/board-size";
 
 export class GameWorld {
   parent_container_ref: HTMLElement;
   cards_container_ref!: HTMLElement;
-  scorePlayer_1_ref!: HTMLElement;
-  scorePlayer_2_ref!: HTMLElement;
-  currentPlayer_img_ref!: HTMLElement;
 
-  static THEME: selectedTheme;
+  static THEME: theme;
 
-  currentPlayer!: SelectedPlayer;
-  players!: Player;
-  boardSize!: selectedBoardSize;
+  static PLAYER_1: Player = {
+    color: "blue",
+    score: 0,
+    el_ref: null,
+    score_ref: null,
+  };
 
-  scorePlayer_1: number = 0;
-  scorePlayer_2: number = 0;
+  static PLAYER_2: Player = {
+    color: "orange",
+    score: 0,
+    el_ref: null,
+    score_ref: null,
+  };
+
+  currentPlayer!: Player;
+
+  static BOARD_SIZE_16: BoardSize = {
+    size: 16,
+    el_ref: null,
+  };
+
+  static BOARD_SIZE_24: BoardSize = {
+    size: 24,
+    el_ref: null,
+  };
+
+  static BOARD_SIZE_36: BoardSize = {
+    size: 36,
+    el_ref: null,
+  };
+
+  static SELECTED_BOARD_SIZE: boardSizes = 24;
 
   static IMG_THEME_INDEX: number[] = [];
-
   MAX_FLIPPED: number = 2;
   cards: Card[] = [];
 
@@ -41,15 +67,13 @@ export class GameWorld {
 
   startGame() {
     this.parent_container_ref.innerHTML = gameWorldTemplate();
-    GameWorld.THEME = this.settings.theme.selectedTheme;
+    GameWorld.THEME = this.settings.selectedTheme;
 
-    this.scorePlayer_1_ref = document.getElementById("score-1") as HTMLElement;
-    this.scorePlayer_2_ref = document.getElementById("score-2") as HTMLElement;
-    this.currentPlayer_img_ref = document.getElementById("current-player") as HTMLElement;
+    GameWorld.PLAYER_1.score_ref = document.getElementById("score-1") as HTMLElement;
+    GameWorld.PLAYER_2.score_ref = document.getElementById("score-2");
+    this.currentPlayer = this.settings.selectedPlayer;
+    this.currentPlayer.el_ref = document.getElementById("current-player") as HTMLElement;
 
-    this.players = this.settings.player;
-    this.currentPlayer = this.settings.player.selectedPlayer;
-    this.boardSize = this.settings.boardSize.selectedBoardSize;
     this.cards_container_ref = document.getElementById("cards") as HTMLElement;
 
     this.calculateImgThemeIndex();
@@ -59,12 +83,12 @@ export class GameWorld {
   }
 
   setCurrentPlayer() {
-    if (this.currentPlayer == "blue") this.currentPlayer_img_ref.setAttribute("src", "/icons/blue.png");
-    else this.currentPlayer_img_ref.setAttribute("src", "/icons/orange.png");
+    if (this.currentPlayer.color == "blue") this.currentPlayer.el_ref!.setAttribute("src", "/icons/blue.png");
+    else this.currentPlayer.el_ref!.setAttribute("src", "/icons/orange.png");
   }
 
   createCards(): void {
-    for (let i = 0; i < this.boardSize; i++) {
+    for (let i = 0; i < GameWorld.SELECTED_BOARD_SIZE; i++) {
       let j: number = GameWorld.IMG_THEME_INDEX[i];
       const card: Card = new Card(i, ImageHub.CODING_THEME[j], this);
       this.cards.push(card);
@@ -72,7 +96,7 @@ export class GameWorld {
   }
 
   calculateImgThemeIndex() {
-    const imgQuantity: number = this.boardSize / 2;
+    const imgQuantity: number = GameWorld.SELECTED_BOARD_SIZE / 2;
 
     GameWorld.IMG_THEME_INDEX = Array.from({ length: imgQuantity }, (_, i) => [i, i]).flat();
 
@@ -134,14 +158,14 @@ export class GameWorld {
       card_1 = "card_1";
       card_2 = "card_2";
 
-      if (this.currentPlayer == "blue") {
-        this.scorePlayer_1++;
-        this.scorePlayer_1_ref.innerHTML = this.scorePlayer_1.toString();
+      if (this.currentPlayer.color == "blue" && GameWorld.PLAYER_1.score_ref) {
+        GameWorld.PLAYER_1.score++;
+        GameWorld.PLAYER_1.score_ref.innerHTML = GameWorld.PLAYER_1.score.toString();
       }
 
-      if (this.currentPlayer == "orange") {
-        this.scorePlayer_2++;
-        this.scorePlayer_2_ref.innerHTML = this.scorePlayer_2.toString();
+      if (this.currentPlayer.color == "orange" && GameWorld.PLAYER_2.score_ref) {
+        GameWorld.PLAYER_2.score++;
+        GameWorld.PLAYER_2.score_ref.innerHTML = GameWorld.PLAYER_2.score.toString();
       }
     } else {
       setTimeout(() => {
@@ -155,12 +179,12 @@ export class GameWorld {
       }, 1000);
     }
 
-    this.isGameOver();
+    this.gameOver();
   }
 
   IS_GAME_OVER: boolean = false;
 
-  isGameOver() {
+  gameOver() {
     this.IS_GAME_OVER = this.cards.every(this.isCardMatched);
     if (this.IS_GAME_OVER) {
       this.parent_container_ref.innerHTML = gameOverTemplate();
@@ -170,9 +194,6 @@ export class GameWorld {
   }
 
   showWinner() {
-    let matchedByBlue: number = 0;
-    let matchedByOrange: number = 0;
-
     const content1: HTMLElement = document.getElementById("content-1") as HTMLElement;
     const content2: HTMLElement = document.getElementById("content-2") as HTMLElement;
     const bluePlayerRef: HTMLElement = document.getElementById("player-blue") as HTMLElement;
@@ -181,17 +202,12 @@ export class GameWorld {
 
     const btnRestart: HTMLElement = document.getElementById("btn-home") as HTMLElement;
 
-    this.cards.forEach((card) => {
-      if (card.MATCHED_BY == "blue") matchedByBlue++;
-      if (card.MATCHED_BY == "orange") matchedByOrange++;
-    });
-
     content1.classList.add("d-none");
     content2.classList.remove("d-none");
 
-    if (matchedByBlue == matchedByOrange) drawScaleRef.classList.add("draw-scale");
-    if (matchedByBlue > matchedByOrange) bluePlayerRef.classList.add("player-blue");
-    if (matchedByBlue < matchedByOrange) orangePlayerRef.classList.add("player-orange");
+    if (GameWorld.PLAYER_1.score == GameWorld.PLAYER_2.score) drawScaleRef.classList.add("draw-scale");
+    if (GameWorld.PLAYER_1.score > GameWorld.PLAYER_2.score) bluePlayerRef.classList.add("player-blue");
+    if (GameWorld.PLAYER_1.score < GameWorld.PLAYER_2.score) orangePlayerRef.classList.add("player-orange");
 
     btnRestart.addEventListener("click", () => {
       this.restartGame();
@@ -211,12 +227,12 @@ export class GameWorld {
   }
 
   switchUser() {
-    if (this.currentPlayer == "blue") {
-      this.currentPlayer = "orange";
-      this.currentPlayer_img_ref.setAttribute("src", "/icons/orange.png");
+    if (this.currentPlayer.color == "blue") {
+      this.currentPlayer.color = "orange";
+      this.currentPlayer.el_ref!.setAttribute("src", "/icons/orange.png");
     } else {
-      this.currentPlayer = "blue";
-      this.currentPlayer_img_ref.setAttribute("src", "/icons/blue.png");
+      this.currentPlayer.color = "blue";
+      this.currentPlayer.el_ref!.setAttribute("src", "/icons/blue.png");
     }
   }
 }

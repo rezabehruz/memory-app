@@ -55,10 +55,11 @@
       }
 
       ul {
-        @include mixins.display-flex($direction: column, $gap: 8px);
+        @include mixins.display-flex($direction: column, $gap: 4px);
 
         .theme {
           @include mixins.display-flex($align: center, $gap: 12px);
+          height: 38px;
           padding-left: 32px;
 
           &__radio {
@@ -139,7 +140,8 @@
         @include mixins.display-flex($direction: column, $gap: 8px);
 
         .player {
-          @include mixins.display-flex($align: center, $gap: 12px);
+          @include mixins.display-flex($align: center, $gap: 6px);
+          height: 38px;
           padding-left: 32px;
 
           &__radio {
@@ -214,10 +216,11 @@
       }
 
       ul {
-        @include mixins.display-flex($direction: column, $gap: 8px);
+        @include mixins.display-flex($direction: column, $gap: 4px);
 
         .board {
           @include mixins.display-flex($align: center, $gap: 12px);
+          height: 38px;
           padding-left: 32px;
 
           &__radio {
@@ -305,6 +308,23 @@
           width: 6px;
           background-color: #f0ea6e;
           transform: rotate(25deg);
+        }
+      }
+      button {
+        @include mixins.display-flex($align: center, $gap: 6px);
+        background-color: #f0ea6e;
+        padding: 12px 16px;
+        color: variables.$background-dark;
+        font-weight: 700;
+
+        img {
+          transition: all 500ms ease-in-out;
+        }
+
+        &:hover {
+          img {
+            rotate: 30deg;
+          }
         }
       }
     }

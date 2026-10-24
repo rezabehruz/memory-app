@@ -18,7 +18,7 @@
       margin: 0 20px;
     }
 
-    span {
+    .to-play {
       display: block;
       font-family: "Red Rose";
       font-weight: 700;
@@ -27,24 +27,48 @@
     }
 
     button {
+      @include all.display-flex($justify: space-around, $align: center, $gap: 18px);
+      background-color: #f0ea6e;
+      padding: 16px;
+
       .img-play {
-        width: 100%;
-        height: 100%;
+        width: 44px;
+        height: 32px;
+        transition: all 500ms ease-in-out;
       }
 
-      .play-hover {
-        display: none;
-        width: 100%;
-        height: 100%;
+      .play {
+        color: all.$background-dark;
+        font-size: 32px;
+        font-family: "Almarai";
+        font-weight: 700;
+      }
+
+      .arrow-icon {
+        @include all.display-flex($align: center, $justify: center);
+
+        span {
+          width: 28px;
+          height: 2px;
+          background: #333;
+
+          &::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            width: 8px;
+            height: 8px;
+            border-top: 3px solid #333;
+            border-right: 3px solid #333;
+            transform: translateY(-50%) rotate(45deg);
+          }
+        }
       }
 
       &:hover {
         .img-play {
-          display: none;
-        }
-
-        .play-hover {
-          display: block;
+          rotate: 30deg;
         }
       }
 

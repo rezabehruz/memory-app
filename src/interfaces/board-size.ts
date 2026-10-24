@@ -1,9 +1,6 @@
-type selectedBoardSize = 16 | 24 | 36;
+import { boardSizes } from "../types/board-size";
 
-interface BoardSize {
-  board_1: number;
-  board_2: number;
-  board_3: number;
-
-  selectedBoardSize: selectedBoardSize;
+export interface BoardSize {
+  size: boardSizes;
+  el_ref: HTMLElement | null;
 }
