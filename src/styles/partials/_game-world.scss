@@ -33,6 +33,11 @@
           span {
             font-size: 24px;
           }
+
+          #score-1 {
+            display: inline-block;
+            width: 16px;
+          }
         }
 
         .player-2 {
@@ -41,6 +46,11 @@
           p,
           span {
             font-size: 24px;
+          }
+
+          #score-2 {
+            display: inline-block;
+            width: 16px;
           }
         }
       }

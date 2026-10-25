@@ -109,8 +109,6 @@ export class Settings {
     this.selected_theme_ref.classList.add("selected");
 
     this.image_theme_ref.setAttribute("src", `/images/themes/${theme}.png`);
-
-    console.log(this.selectedTheme);
   }
 
   togglePlayer(player: Player) {

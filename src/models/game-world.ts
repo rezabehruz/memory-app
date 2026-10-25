@@ -70,9 +70,11 @@ export class GameWorld {
     GameWorld.THEME = this.settings.selectedTheme;
 
     GameWorld.PLAYER_1.score_ref = document.getElementById("score-1") as HTMLElement;
-    GameWorld.PLAYER_2.score_ref = document.getElementById("score-2");
+    GameWorld.PLAYER_2.score_ref = document.getElementById("score-2") as HTMLElement;
+    GameWorld.PLAYER_1.el_ref = document.getElementById("current-player") as HTMLElement;
+    GameWorld.PLAYER_2.el_ref = document.getElementById("current-player") as HTMLElement;
+
     this.currentPlayer = this.settings.selectedPlayer;
-    this.currentPlayer.el_ref = document.getElementById("current-player") as HTMLElement;
 
     this.cards_container_ref = document.getElementById("cards") as HTMLElement;
 
@@ -151,7 +153,7 @@ export class GameWorld {
       this.cards.forEach((card) => {
         if (card.IS_FLIPPED && !card.IS_MATCHED) {
           card.IS_MATCHED = true;
-          card.MATCHED_BY = this.currentPlayer;
+          card.MATCHED_BY = this.currentPlayer.color;
         }
       });
 
@@ -219,6 +221,10 @@ export class GameWorld {
   }
 
   restartGame() {
+    GameWorld.PLAYER_1.score = 0;
+    GameWorld.PLAYER_2.score = 0;
+    GameWorld.SELECTED_BOARD_SIZE = 24;
+
     this.parent_container_ref.innerHTML = settingsTemplate();
     this.settings = new Settings();
 
@@ -231,11 +237,11 @@ export class GameWorld {
   }
 
   switchUser() {
-    if (this.currentPlayer.color == "blue") {
-      this.currentPlayer.color = "orange";
+    if (this.currentPlayer == GameWorld.PLAYER_1) {
+      this.currentPlayer = GameWorld.PLAYER_2;
       this.currentPlayer.el_ref!.setAttribute("src", "/icons/orange.png");
     } else {
-      this.currentPlayer.color = "blue";
+      this.currentPlayer = GameWorld.PLAYER_1;
       this.currentPlayer.el_ref!.setAttribute("src", "/icons/blue.png");
     }
   }
