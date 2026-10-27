@@ -6,11 +6,11 @@ export function gameOverTemplate(){
           <p class="header">Final score</p>
           <div class="players">
             <div class="player-1">
-              <img src="/icons/blue.png" alt="blue arrow" />
+              <img src="/icons/blue.png" alt="blue arrow" id="player-blue-1"/>
               <p>Blue <span id="final-score-1"> 0 </span></p>
             </div>
             <div class="player-2">
-              <img src="/icons/orange.png" alt="orange arrow" />
+              <img src="/icons/orange.png" alt="orange arrow" id="player-orange-1"/>
               <p>Orange <span id="final-score-2"> 0 </span></p>
             </div>
           </div>

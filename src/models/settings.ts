@@ -108,6 +108,7 @@ export class Settings {
     this.selected_theme_ref = el;
     this.selected_theme_ref.classList.add("selected");
 
+    document.documentElement.dataset.theme = this.selectedTheme;
     this.image_theme_ref.setAttribute("src", `/images/themes/${theme}.png`);
   }
 

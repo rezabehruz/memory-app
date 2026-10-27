@@ -1,3 +1,4 @@
+import { Player } from "../interfaces/player";
 import { cardsTemplate } from "../templates/card-template";
 import { GameWorld } from "./game-world";
 
@@ -7,8 +8,6 @@ export class Card {
   name: string;
   IS_FLIPPED: boolean = false;
   IS_MATCHED: boolean = false;
-  MATCHED_BY: SelectedPlayer | null = null;
-
   gameWorld: GameWorld;
 
   constructor(_id: number, _name: string, _gameWorld: GameWorld) {

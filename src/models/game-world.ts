@@ -19,14 +19,18 @@ export class GameWorld {
     color: "blue",
     score: 0,
     el_ref: null,
+    current_player_ref: null,
     score_ref: null,
+    icon_url: "/icons/player-blue-coding.png",
   };
 
   static PLAYER_2: Player = {
     color: "orange",
     score: 0,
     el_ref: null,
+    current_player_ref: null,
     score_ref: null,
+    icon_url: "/icons/player-orange-coding.png",
   };
 
   currentPlayer!: Player;
@@ -65,34 +69,59 @@ export class GameWorld {
     this.BTN_START_GAME.addEventListener("click", () => this.startGame());
   }
 
+  setPlayersIcon() {
+    if(this.IS_GAME_OVER && GameWorld.THEME !== "coding") {
+    GameWorld.PLAYER_1.el_ref = document.getElementById("player-blue-1") as HTMLElement;
+    GameWorld.PLAYER_2.el_ref = document.getElementById("player-orange-1") as HTMLElement;
+
+    GameWorld.PLAYER_1.el_ref?.setAttribute("src", GameWorld.PLAYER_1.icon_url );
+    GameWorld.PLAYER_2.el_ref?.setAttribute("src", GameWorld.PLAYER_2.icon_url);
+    
+      return;
+    }
+    if (GameWorld.THEME == "coding") {
+      GameWorld.PLAYER_1.icon_url = "/icons/player-blue-coding.png";
+      GameWorld.PLAYER_2.icon_url = "/icons/player-orange-coding.png";
+    } else {
+      GameWorld.PLAYER_1.icon_url = "/icons/player-blue-sm.png";
+      GameWorld.PLAYER_2.icon_url = "/icons/player-orange-sm.png";
+    }
+
+    GameWorld.PLAYER_1.el_ref?.setAttribute("src", GameWorld.PLAYER_1.icon_url);
+    GameWorld.PLAYER_2.el_ref?.setAttribute("src", GameWorld.PLAYER_2.icon_url);
+  }
+
   startGame() {
     this.parent_container_ref.innerHTML = gameWorldTemplate();
     GameWorld.THEME = this.settings.selectedTheme;
 
     GameWorld.PLAYER_1.score_ref = document.getElementById("score-1") as HTMLElement;
     GameWorld.PLAYER_2.score_ref = document.getElementById("score-2") as HTMLElement;
-    GameWorld.PLAYER_1.el_ref = document.getElementById("current-player") as HTMLElement;
-    GameWorld.PLAYER_2.el_ref = document.getElementById("current-player") as HTMLElement;
+    GameWorld.PLAYER_1.el_ref = document.getElementById("player-1") as HTMLElement;
+    GameWorld.PLAYER_2.el_ref = document.getElementById("player-2") as HTMLElement;
+    GameWorld.PLAYER_1.current_player_ref = document.getElementById("current-player") as HTMLElement;
+    GameWorld.PLAYER_2.current_player_ref = document.getElementById("current-player") as HTMLElement;
+
+    this.setPlayersIcon();
 
     this.currentPlayer = this.settings.selectedPlayer;
+    this.currentPlayer.current_player_ref!.setAttribute("src", this.currentPlayer.icon_url);
 
     this.cards_container_ref = document.getElementById("cards") as HTMLElement;
 
     this.calculateImgThemeIndex();
     this.createCards();
-
-    this.setCurrentPlayer();
-  }
-
-  setCurrentPlayer() {
-    if (this.currentPlayer.color == "blue") this.currentPlayer.el_ref!.setAttribute("src", "/icons/blue.png");
-    else this.currentPlayer.el_ref!.setAttribute("src", "/icons/orange.png");
   }
 
   createCards(): void {
+    let images: string[] = [];
+    if (GameWorld.THEME == "coding") images = ImageHub.CODING_THEME;
+
+    if (GameWorld.THEME == "food") images = ImageHub.FOOD_THEME;
+
     for (let i = 0; i < GameWorld.SELECTED_BOARD_SIZE; i++) {
       let j: number = GameWorld.IMG_THEME_INDEX[i];
-      const card: Card = new Card(i, ImageHub.CODING_THEME[j], this);
+      const card: Card = new Card(i, images[j], this);
       this.cards.push(card);
     }
   }
@@ -151,10 +180,7 @@ export class GameWorld {
     // if two cards are matched and did'nt match
     if (card_1 == card_2) {
       this.cards.forEach((card) => {
-        if (card.IS_FLIPPED && !card.IS_MATCHED) {
-          card.IS_MATCHED = true;
-          card.MATCHED_BY = this.currentPlayer.color;
-        }
+        if (card.IS_FLIPPED && !card.IS_MATCHED) card.IS_MATCHED = true;
       });
 
       card_1 = "card_1";
@@ -195,6 +221,8 @@ export class GameWorld {
       let final_score_2_ref = document.getElementById("final-score-2") as HTMLElement;
       final_score_1_ref.innerHTML = GameWorld.PLAYER_1.score.toString();
       final_score_2_ref.innerHTML = GameWorld.PLAYER_2.score.toString();
+
+      this.setPlayersIcon();
       setTimeout(() => this.showWinner(), 2000);
     }
   }
@@ -224,6 +252,7 @@ export class GameWorld {
     GameWorld.PLAYER_1.score = 0;
     GameWorld.PLAYER_2.score = 0;
     GameWorld.SELECTED_BOARD_SIZE = 24;
+    this.IS_GAME_OVER = false;
 
     this.parent_container_ref.innerHTML = settingsTemplate();
     this.settings = new Settings();
@@ -239,10 +268,10 @@ export class GameWorld {
   switchUser() {
     if (this.currentPlayer == GameWorld.PLAYER_1) {
       this.currentPlayer = GameWorld.PLAYER_2;
-      this.currentPlayer.el_ref!.setAttribute("src", "/icons/orange.png");
+      this.currentPlayer.current_player_ref!.setAttribute("src", this.currentPlayer.icon_url);
     } else {
       this.currentPlayer = GameWorld.PLAYER_1;
-      this.currentPlayer.el_ref!.setAttribute("src", "/icons/blue.png");
+      this.currentPlayer.current_player_ref!.setAttribute("src", this.currentPlayer.icon_url);
     }
   }
 }

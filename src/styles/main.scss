@@ -1,8 +1,25 @@
 @use "./imports.scss" as all;
 
+:root {
+  --font-family-1: "Almarai";
+  --font-family-2: "Red Rose";
+  --bg-color: #303131;
+  --text-color-1: #ffffff;
+}
+
+[data-theme = "food"] {
+  --font-family-1: "Klee One";
+  --font-family-2: "Delius Unicase";
+  --bg-color: #ffffff;
+  --text-color-1: #F3832D;
+  --text-color-2:  #A45212;
+  
+  --bg-header:#F0E5D9;
+}
+
 .home {
   @include all.section;
-  background: all.$background-dark;
+  background: all.$color-dark;
 
   .content {
     @include all.display-flex($direction: column, $justify: center, $align: center);
@@ -38,7 +55,7 @@
       }
 
       .play {
-        color: all.$background-dark;
+        color: all.$color-dark;
         font-size: 32px;
         font-family: "Almarai";
         font-weight: 700;

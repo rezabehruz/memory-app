@@ -4,21 +4,24 @@
 
 .world {
   @include mixins.section;
-  font-family: "Almarai";
-  background-color: variables.$background-dark;
+  font-family: var(--font-family-1);
+  background-color: var(--bg-color);
 
   .content {
     width: 100%;
     max-width: 1440px;
     min-height: 100vh;
+    padding: 12px;
 
     @include mixins.display-flex($direction: column);
 
     .header {
       @include mixins.display-flex($justify: space-around, $align: center);
-      height: 12vh;
+      height: 10vh;
       width: 100%;
-      color: white;
+      background: var(--bg-header);
+      border-radius: 4px;
+      color: var(--text-color-1);
 
       .players {
         @include mixins.display-flex($gap: 12px, $align: center);
@@ -61,6 +64,11 @@
         span {
           font-size: 26px;
         }
+        .player-icon {
+          height: 30px;
+          width: 30px;
+          background-image: url("");
+        }
       }
 
       .exit-game {
@@ -69,6 +77,11 @@
         font-size: 24px;
         background-color: variables.$color-btn-background;
         border: 1px solid variables.$color-aquamarine;
+
+        .exit-icon {
+          width: 30px;
+          height: 30px;
+        }
       }
     }
 

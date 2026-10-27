@@ -4,7 +4,7 @@
 
 .game-over {
   @include mixins.section;
-  background: variables.$background-dark;
+  background: var(--bg-color);
 
   .content-1 {
     @include mixins.display-flex($direction: column, $justify: center, $align: center);
@@ -13,7 +13,7 @@
     height: 100vh;
 
     h2 {
-      font-family: "Red Rose";
+      font-family: var(--font-family-1);
       font-size: 100px;
       color: #4dd5bc;
       font-weight: 600;
@@ -21,7 +21,7 @@
 
     .header {
       margin-top: 48px;
-      font-family: "Almarai";
+      font-family: var(--font-family-1);
       font-width: 400;
       font-size: 20px;
       color: white;
@@ -31,7 +31,7 @@
       @include mixins.display-flex($gap: 12px, $align: center);
       margin-top: 12px;
       padding: 18px;
-      font-family: "Almarai";
+      font-family: var(--font-family-1);
       background: rgb(65, 86, 82);
 
       .player-1 {
@@ -60,7 +60,7 @@
     width: 100%;
     max-width: 1440px;
     height: 100vh;
-    font-family: "Almarai";
+    font-family: var(--font-family-1);
 
     background-image: url("/images/backgrounds/confetti.png");
     background-position-y: top;
@@ -68,11 +68,11 @@
 
     p {
       text-align: center;
-      color: variables.$color-white;
+      color: var(--color-text-1);
     }
 
     h3 {
-      font-family: "Red Rose";
+      font-family: var(--font-family-2);
       text-transform: uppercase;
       font-size: 32px;
       font-weight: 600;
