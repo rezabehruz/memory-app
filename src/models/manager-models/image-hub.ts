@@ -40,4 +40,46 @@ export class ImageHub {
     "food-17",
     "food-18",
   ];
+
+  static GAMING_THEME = [
+    "gaming-1",
+    "gaming-2",
+    "gaming-3",
+    "gaming-4",
+    "gaming-5",
+    "gaming-6",
+    "gaming-7",
+    "gaming-8",
+    "gaming-9",
+    "gaming-10",
+    "gaming-11",
+    "gaming-12",
+    "gaming-13",
+    "gaming-14",
+    "gaming-15",
+    "gaming-16",
+    "gaming-17",
+    "gaming-18",
+  ];
+
+  static DA_THEME = [
+    "da-1",
+    "da-2",
+    "da-3",
+    "da-4",
+    "da-5",
+    "da-6",
+    "da-7",
+    "da-8",
+    "da-9",
+    "da-10",
+    "da-11",
+    "da-12",
+    "da-13",
+    "da-14",
+    "da-15",
+    "da-16",
+    "da-17",
+    "da-18",
+  ];
 }

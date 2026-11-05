@@ -4,17 +4,47 @@
   --font-family-1: "Almarai";
   --font-family-2: "Red Rose";
   --bg-color: #303131;
+  --game-over-bg: #303131;
   --text-color-1: #ffffff;
+  --text-color-2: #4dd5bc;
+  --btn-bg-color: #3d5349;
+  --btn-border-color: #4dd5bc;
 }
 
-[data-theme = "food"] {
+[data-theme="gaming"] {
+  --font-family-1: "Orbitron";
+  --font-family-2: "Orbitron";
+  --bg-color: #294F60;
+  --game-over-bg: #294F60;
+  --text-color-1: #ffffff;
+  --text-color-2: #ED1B76;
+  --btn-bg-color: #254453;
+  --btn-border-color: #ED1B7614;
+  --bg-header: #FD96C933;
+}
+
+[data-theme="da"] {
+  --font-family-1: "Figtree";
+  --font-family-2: "Figtree";
+  --bg-color:  #ffffff;
+  --game-over-bg: #1E7594;
+  --text-color-1: #579fb9;
+  --text-color-2: #FFFFFF;
+  --btn-bg-color: #BFE5F2;
+  --btn-border-color: #BFE5F2;
+  --bg-header: #F0F3F4;
+}
+
+[data-theme="food"] {
   --font-family-1: "Klee One";
   --font-family-2: "Delius Unicase";
   --bg-color: #ffffff;
-  --text-color-1: #F3832D;
-  --text-color-2:  #A45212;
-  
-  --bg-header:#F0E5D9;
+  --game-over-bg: #F3832D;
+  --text-color-1: #f3832d;
+  --text-color-2: #a45212;
+  --btn-bg-color: #f08a42;
+  --btn-border-color: #e2af6c;
+  --bg-header: #f0e5d9;
 }
 
 .home {

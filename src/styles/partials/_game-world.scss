@@ -24,37 +24,36 @@
       color: var(--text-color-1);
 
       .players {
-        @include mixins.display-flex($gap: 12px, $align: center);
-        padding: 18px;
+        @include mixins.display-flex($align: center);
+        padding: 14px;
         background: rgb(65, 86, 82);
 
         .player-1 {
-          @include mixins.display-flex($align: center, $gap: 6px);
+          @include mixins.display-flex($gap: 6px, $align: center);
           color: rgb(43, 177, 255);
 
-          p,
-          span {
+          p {
             font-size: 24px;
-          }
-
-          #score-1 {
-            display: inline-block;
-            width: 16px;
           }
         }
 
         .player-2 {
-          @include mixins.display-flex($align: center, $gap: 6px);
+          @include mixins.display-flex($gap: 6px, $align: center);
           color: rgb(245, 142, 57);
-          p,
-          span {
+
+          p {
             font-size: 24px;
           }
+        }
 
-          #score-2 {
-            display: inline-block;
-            width: 16px;
-          }
+        .w-95 {
+          width: 95px;
+        }
+        .w-85 {
+          width: 85px;
+        }
+        .w-42 {
+          width: 42px;
         }
       }
 

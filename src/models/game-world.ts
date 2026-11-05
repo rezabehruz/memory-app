@@ -70,13 +70,13 @@ export class GameWorld {
   }
 
   setPlayersIcon() {
-    if(this.IS_GAME_OVER && GameWorld.THEME !== "coding") {
-    GameWorld.PLAYER_1.el_ref = document.getElementById("player-blue-1") as HTMLElement;
-    GameWorld.PLAYER_2.el_ref = document.getElementById("player-orange-1") as HTMLElement;
+    if (this.IS_GAME_OVER && GameWorld.THEME !== "coding") {
+      GameWorld.PLAYER_1.el_ref = document.getElementById("player-blue-1") as HTMLElement;
+      GameWorld.PLAYER_2.el_ref = document.getElementById("player-orange-1") as HTMLElement;
 
-    GameWorld.PLAYER_1.el_ref?.setAttribute("src", GameWorld.PLAYER_1.icon_url );
-    GameWorld.PLAYER_2.el_ref?.setAttribute("src", GameWorld.PLAYER_2.icon_url);
-    
+      GameWorld.PLAYER_1.el_ref?.setAttribute("src", GameWorld.PLAYER_1.icon_url);
+      GameWorld.PLAYER_2.el_ref?.setAttribute("src", GameWorld.PLAYER_2.icon_url);
+
       return;
     }
     if (GameWorld.THEME == "coding") {
@@ -91,9 +91,25 @@ export class GameWorld {
     GameWorld.PLAYER_2.el_ref?.setAttribute("src", GameWorld.PLAYER_2.icon_url);
   }
 
+  setPlayersScore() {
+    if (GameWorld.PLAYER_1.score_ref && GameWorld.PLAYER_2.score_ref) {
+      if (GameWorld.THEME == "coding") {
+        GameWorld.PLAYER_1.score_ref.innerHTML = GameWorld.PLAYER_1.color + " " + GameWorld.PLAYER_1.score.toString();
+        GameWorld.PLAYER_2.score_ref.innerHTML = GameWorld.PLAYER_2.color + " " + GameWorld.PLAYER_2.score.toString();
+      } else {
+        GameWorld.PLAYER_1.score_ref.innerHTML = GameWorld.PLAYER_1.score.toString();
+        GameWorld.PLAYER_2.score_ref.innerHTML = GameWorld.PLAYER_2.score.toString();
+
+        GameWorld.PLAYER_1.score_ref.classList.add("w-42");
+        GameWorld.PLAYER_2.score_ref.classList.add("w-42");
+      }
+    }
+  }
+
   startGame() {
     this.parent_container_ref.innerHTML = gameWorldTemplate();
     GameWorld.THEME = this.settings.selectedTheme;
+    document.documentElement.dataset.theme = GameWorld.THEME;
 
     GameWorld.PLAYER_1.score_ref = document.getElementById("score-1") as HTMLElement;
     GameWorld.PLAYER_2.score_ref = document.getElementById("score-2") as HTMLElement;
@@ -107,6 +123,8 @@ export class GameWorld {
     this.currentPlayer = this.settings.selectedPlayer;
     this.currentPlayer.current_player_ref!.setAttribute("src", this.currentPlayer.icon_url);
 
+    this.setPlayersScore();
+
     this.cards_container_ref = document.getElementById("cards") as HTMLElement;
 
     this.calculateImgThemeIndex();
@@ -115,9 +133,11 @@ export class GameWorld {
 
   createCards(): void {
     let images: string[] = [];
-    if (GameWorld.THEME == "coding") images = ImageHub.CODING_THEME;
 
-    if (GameWorld.THEME == "food") images = ImageHub.FOOD_THEME;
+    if (GameWorld.THEME == "coding") images = ImageHub.CODING_THEME;
+    else if (GameWorld.THEME == "da") images = ImageHub.DA_THEME;
+    else if (GameWorld.THEME == "gaming") images = ImageHub.GAMING_THEME;
+    else images = ImageHub.FOOD_THEME;
 
     for (let i = 0; i < GameWorld.SELECTED_BOARD_SIZE; i++) {
       let j: number = GameWorld.IMG_THEME_INDEX[i];
@@ -188,12 +208,16 @@ export class GameWorld {
 
       if (this.currentPlayer.color == "blue" && GameWorld.PLAYER_1.score_ref) {
         GameWorld.PLAYER_1.score++;
-        GameWorld.PLAYER_1.score_ref.innerHTML = GameWorld.PLAYER_1.score.toString();
+        if (GameWorld.THEME == "coding")
+          GameWorld.PLAYER_1.score_ref.innerHTML = this.currentPlayer.color + " " + GameWorld.PLAYER_1.score.toString();
+        else GameWorld.PLAYER_1.score_ref.innerHTML = GameWorld.PLAYER_1.score.toString();
       }
 
       if (this.currentPlayer.color == "orange" && GameWorld.PLAYER_2.score_ref) {
         GameWorld.PLAYER_2.score++;
-        GameWorld.PLAYER_2.score_ref.innerHTML = GameWorld.PLAYER_2.score.toString();
+        if (GameWorld.THEME == "coding")
+          GameWorld.PLAYER_2.score_ref.innerHTML = this.currentPlayer.color + " " + GameWorld.PLAYER_2.score.toString();
+        else GameWorld.PLAYER_2.score_ref.innerHTML = GameWorld.PLAYER_2.score.toString();
       }
     } else {
       setTimeout(() => {
@@ -219,8 +243,13 @@ export class GameWorld {
       this.parent_container_ref.innerHTML = gameOverTemplate();
       let final_score_1_ref = document.getElementById("final-score-1") as HTMLElement;
       let final_score_2_ref = document.getElementById("final-score-2") as HTMLElement;
-      final_score_1_ref.innerHTML = GameWorld.PLAYER_1.score.toString();
-      final_score_2_ref.innerHTML = GameWorld.PLAYER_2.score.toString();
+      if (GameWorld.THEME == "coding") {
+        final_score_1_ref.innerHTML = GameWorld.PLAYER_1.color + " " + GameWorld.PLAYER_1.score.toString();
+        final_score_2_ref.innerHTML = GameWorld.PLAYER_2.color + " " + GameWorld.PLAYER_2.score.toString();
+      } else {
+        final_score_1_ref.innerHTML = GameWorld.PLAYER_1.score.toString();
+        final_score_2_ref.innerHTML = GameWorld.PLAYER_2.score.toString();
+      }
 
       this.setPlayersIcon();
       setTimeout(() => this.showWinner(), 2000);
