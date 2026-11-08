@@ -8,10 +8,12 @@ import { ImageHub } from "./manager-models/image-hub";
 import { Settings } from "./settings";
 import { theme } from "../types/theme";
 import { BoardSize } from "../interfaces/board-size";
+import { homeTemplate } from "../templates/home-template";
 
 export class GameWorld {
   parent_container_ref: HTMLElement;
   cards_container_ref!: HTMLElement;
+  btn_exit_ref!: HTMLElement;
 
   static THEME: theme;
 
@@ -106,6 +108,11 @@ export class GameWorld {
     }
   }
 
+  setCardsContainerWidth() {
+    if (GameWorld.SELECTED_BOARD_SIZE == 16) this.cards_container_ref.classList.add("w-450");
+    else this.cards_container_ref.classList.add("w-670");
+  }
+
   startGame() {
     this.parent_container_ref.innerHTML = gameWorldTemplate();
     GameWorld.THEME = this.settings.selectedTheme;
@@ -118,6 +125,9 @@ export class GameWorld {
     GameWorld.PLAYER_1.current_player_ref = document.getElementById("current-player") as HTMLElement;
     GameWorld.PLAYER_2.current_player_ref = document.getElementById("current-player") as HTMLElement;
 
+    this.btn_exit_ref = document.getElementById("btn-exit") as HTMLElement;
+    this.btn_exit_ref.addEventListener("click", () => this.exitGame());
+
     this.setPlayersIcon();
 
     this.currentPlayer = this.settings.selectedPlayer;
@@ -126,9 +136,19 @@ export class GameWorld {
     this.setPlayersScore();
 
     this.cards_container_ref = document.getElementById("cards") as HTMLElement;
+    this.setCardsContainerWidth();
 
     this.calculateImgThemeIndex();
     this.createCards();
+  }
+
+  exitGame() {
+    this.parent_container_ref.innerHTML = homeTemplate();
+
+    const BTN_PLAY: HTMLElement = document.getElementById("btn-play") as HTMLElement;
+    BTN_PLAY.addEventListener("click", () => {
+      this.restartGame();
+    });
   }
 
   createCards(): void {
@@ -238,6 +258,7 @@ export class GameWorld {
 
   gameOver() {
     this.IS_GAME_OVER = this.cards.every(this.isCardMatched);
+    console.log("from gameover()", this.cards);
 
     if (this.IS_GAME_OVER) {
       this.parent_container_ref.innerHTML = gameOverTemplate();
@@ -278,6 +299,7 @@ export class GameWorld {
   }
 
   restartGame() {
+    this.cards = [];
     GameWorld.PLAYER_1.score = 0;
     GameWorld.PLAYER_2.score = 0;
     GameWorld.SELECTED_BOARD_SIZE = 24;

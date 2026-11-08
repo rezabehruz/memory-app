@@ -70,7 +70,7 @@
         }
       }
 
-      .exit-game {
+      .btn-exit {
         @include mixins.display-flex($align: center, $gap: 10px);
         padding: 12px 22px;
         font-size: 24px;
@@ -87,9 +87,50 @@
     .cards {
       @include mixins.display-flex($justify: center, $wrap: wrap, $gap: 12px);
       align-self: center;
-      width: 35vw;
-
       margin-top: 6vh;
+    }
+
+    .exit-dialog {
+      width: 480px;
+      padding: 24px 20px;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: var(--dialog-bg);
+      border-radius: 8px;
+
+      p {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 700;
+      }
+
+      .options {
+        @include mixins.display-flex($justify: center, $gap: 6px);
+        width: 100%;
+        margin-top: 22px;
+
+        .btn-back {
+          background-color: var(--btn-border-color);
+          width: 150px;
+          padding: 10px 14px;
+          color: var(--text-color-1);
+        }
+
+        .btn-exit {
+          width: 150px;
+          padding: 8px 12px;
+          border: 2px solid var(--btn-border-color);
+        }
+      }
+    }
+
+    .w-450 {
+      max-width: 450px;
+    }
+
+    .w-670 {
+      max-width: 670px;
     }
   }
 }

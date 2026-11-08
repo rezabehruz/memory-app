@@ -19,7 +19,7 @@ export function gameWorldTemplate(): string {
               </span>
               <img src="/icons/orange.png" alt="current player arrow" id="current-player"/>
             </div>
-            <button class="exit-game">
+            <button popovertarget="exit-dialog" class="btn-exit">
               <svg
                   class="exit-icon"
                   xmlns="http://www.w3.org/2000/svg"
@@ -37,8 +37,14 @@ export function gameWorldTemplate(): string {
               Exit game
             </button>
           </div>
-          <div id="cards" class="cards">
-          </div>
+          <div id="cards" class="cards"></div>
+          <dialog id="exit-dialog" popover class="exit-dialog">
+                <p>Are You sure you want to quit the game?</p>
+                <div class="options">
+                  <button popovertarget="exit-dialog" popovertargetaction="hide" class="btn-back">Back to game</button>
+                  <button popovertarget="exit-dialog" popovertargetaction="hide" id="btn-exit" class="btn-exit">Exit game</button>
+                </div>
+          </dialog>
         </div>
       </section>
   `;

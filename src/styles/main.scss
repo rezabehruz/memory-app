@@ -9,42 +9,46 @@
   --text-color-2: #4dd5bc;
   --btn-bg-color: #3d5349;
   --btn-border-color: #4dd5bc;
+  --dialog-bg: #ffffff;
 }
 
 [data-theme="gaming"] {
   --font-family-1: "Orbitron";
   --font-family-2: "Orbitron";
-  --bg-color: #294F60;
-  --game-over-bg: #294F60;
+  --bg-color: #294f60;
+  --game-over-bg: #294f60;
   --text-color-1: #ffffff;
-  --text-color-2: #ED1B76;
+  --text-color-2: #ed1b76;
   --btn-bg-color: #254453;
-  --btn-border-color: #ED1B7614;
-  --bg-header: #FD96C933;
+  --btn-border-color: #ed1b7614;
+  --bg-header: #fd96c933;
+  --dialog-bg: #f0f6f9;
 }
 
 [data-theme="da"] {
   --font-family-1: "Figtree";
   --font-family-2: "Figtree";
-  --bg-color:  #ffffff;
-  --game-over-bg: #1E7594;
+  --bg-color: #ffffff;
+  --game-over-bg: #1e7594;
   --text-color-1: #579fb9;
-  --text-color-2: #FFFFFF;
-  --btn-bg-color: #BFE5F2;
-  --btn-border-color: #BFE5F2;
-  --bg-header: #F0F3F4;
+  --text-color-2: #ffffff;
+  --btn-bg-color: #1e7594;
+  --btn-border-color: #bfe5f2;
+  --bg-header: #f0f3f4;
+  --dialog-bg: #f0f6f9;
 }
 
 [data-theme="food"] {
   --font-family-1: "Klee One";
   --font-family-2: "Delius Unicase";
   --bg-color: #ffffff;
-  --game-over-bg: #F3832D;
+  --game-over-bg: #f3832d;
   --text-color-1: #f3832d;
   --text-color-2: #a45212;
   --btn-bg-color: #f08a42;
   --btn-border-color: #e2af6c;
   --bg-header: #f0e5d9;
+  --dialog-bg: #f6f6f6;
 }
 
 .home {
